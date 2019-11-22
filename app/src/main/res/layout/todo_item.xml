@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/padding_item"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/checkbox_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_item"
+        />
+
+    <TextView
+        android:id="@+id/text_view"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_item"
+        />
+
+
+    <ImageButton
+        android:id="@+id/btn_delete"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_item"
+        />
+
+</LinearLayout>
