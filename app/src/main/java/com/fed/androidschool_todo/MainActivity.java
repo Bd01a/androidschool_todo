@@ -1,10 +1,5 @@
 package com.fed.androidschool_todo;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -12,9 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,25 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerview_todo);
 
 
+
+    }
+
+    private void showPopupMenu(View v, ToDoSchema.ToDoElement element) {
+        PopupMenu popupMenu = new PopupMenu(this, v);
+        popupMenu.inflate(R.menu.popup_menu_item);
+        final ToDoSchema.ToDoElement elemFinal = element;
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.item_delete) {
+                    DeleteToDo deleteToDo = new DeleteToDo();
+                    deleteToDo.execute(elemFinal);
+                    return true;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 
     class AddToDo extends AsyncTask<String,Void,Void>{
@@ -111,9 +131,8 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onDelet(ToDoSchema.ToDoElement element) {
-                            DeleteToDo deleteToDo = new DeleteToDo();
-                            deleteToDo.execute(element);
+                        public void onDelete(ToDoSchema.ToDoElement element, View v) {
+                            showPopupMenu(v, element);
                         }
                     });
             mRecyclerView.setAdapter(toDoAdapter);

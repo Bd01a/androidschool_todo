@@ -49,13 +49,11 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
 
         TextView mTextView;
         CheckBox mCheckBox;
-        ImageButton mDeleteButton;
 
         ToDoViewHolder(@NonNull View itemView) {
             super(itemView);
             mTextView = itemView.findViewById(R.id.text_view);
             mCheckBox = itemView.findViewById(R.id.checkbox_flag);
-            mDeleteButton = itemView.findViewById(R.id.btn_delete);
         }
 
         void bind(final ToDoSchema.ToDoElement element){
@@ -69,19 +67,19 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
                 }
             });
 
-
-            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
-                   mOnDataChanged.onDelet(element);
+                public boolean onLongClick(View v) {
+                    mOnDataChanged.onDelete(element, v);
+                    return true;
                 }
             });
         }
     }
 
     interface OnDataChanged{
-        public void onUpdate(ToDoSchema.ToDoElement element);
-        public void onDelet(ToDoSchema.ToDoElement element);
+         void onUpdate(ToDoSchema.ToDoElement element);
+         void onDelete(ToDoSchema.ToDoElement element, View v);
     }
 
 

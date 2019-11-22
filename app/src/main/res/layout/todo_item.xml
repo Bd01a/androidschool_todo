@@ -22,13 +22,4 @@
         android:padding="@dimen/padding_item"
         />
 
-
-    <ImageButton
-        android:id="@+id/btn_delete"
-        android:src="@drawable/ic_delete_black_24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_item"
-        />
-
 </LinearLayout>
