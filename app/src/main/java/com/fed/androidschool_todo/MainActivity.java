@@ -122,8 +122,7 @@ public class MainActivity extends AppCompatActivity {
             finally {
                 cursor.close();
             }
-            ToDoAdapter toDoAdapter = new ToDoAdapter(activities, MainActivity.this,
-                    new ToDoAdapter.OnDataChanged() {
+            ToDoAdapter toDoAdapter = new ToDoAdapter(activities, new ToDoAdapter.OnDataChanged() {
                         @Override
                         public void onUpdate(ToDoSchema.ToDoElement element) {
                             UpdateToDo updateToDo = new UpdateToDo();
